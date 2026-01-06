@@ -1,4 +1,4 @@
-import HeartbeatLoader from "@/components/shared/HearbeatLoader";
+import HeartbeatLoader from "@/components/modules/shared/HearbeatLoader";
 
 const GlobalLoading = () => {
   return <HeartbeatLoader />;
