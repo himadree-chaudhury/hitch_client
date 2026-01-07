@@ -68,7 +68,7 @@ export function Register() {
         throw errorData;
       }
       toast.success("User logged in successfully", { id: toastId });
-      router.push("/dashboard");
+      router.push("/login");
     } catch (error: unknown) {
       const err = error as IResponseError;
       toast.error(`${err.status}: ${err.message}`, { id: toastId });
