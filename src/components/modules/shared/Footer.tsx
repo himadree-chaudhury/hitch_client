@@ -1,144 +1,168 @@
+import logo from "@/assets/logo.png";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Github, Heart, Linkedin, Mail, Twitter } from "lucide-react";
+import {
+  Facebook,
+  Instagram,
+  Linkedin,
+  Mail,
+  MapPin,
+  Phone,
+  Twitter,
+} from "lucide-react";
+import Image from "next/image";
+import Link from "next/link";
 
-export default function Footer() {
+const Footer = () => {
   const currentYear = new Date().getFullYear();
 
   const footerLinks = {
-    navigation: [
-      { label: "Home", href: "#home" },
-      { label: "About", href: "#about" },
-      { label: "Projects", href: "#projects" },
-      { label: "Services", href: "#services" },
-      { label: "Contact", href: "#contact" },
+    product: [
+      { name: "Explore Events", href: "/events" },
+      { name: "Become a Host", href: "/host" },
+      { name: "How it Works", href: "/how-it-works" },
+      { name: "Pricing", href: "/pricing" },
     ],
-    services: [
-      { label: "Web Development", href: "#web-dev" },
-      { label: "Mobile Apps", href: "#mobile" },
-      { label: "UI/UX Design", href: "#design" },
-      { label: "Consulting", href: "#consulting" },
+    company: [
+      { name: "About Us", href: "/about" },
+      { name: "Careers", href: "/careers" },
+      { name: "Blog", href: "/blog" },
+      { name: "Contact Support", href: "/contact" },
     ],
-    resources: [
-      { label: "Blog", href: "#blog" },
-      { label: "Case Studies", href: "#case-studies" },
-      { label: "Privacy Policy", href: "#privacy" },
-      { label: "Terms of Service", href: "#terms" },
+    legal: [
+      { name: "Terms of Service", href: "/terms" },
+      { name: "Privacy Policy", href: "/privacy" },
+      { name: "Cookie Policy", href: "/cookies" },
     ],
   };
 
-  const socialLinks = [
-    { icon: Github, url: "https://github.com/yourusername", label: "GitHub" },
-    {
-      icon: Linkedin,
-      url: "https://linkedin.com/in/yourusername",
-      label: "LinkedIn",
-    },
-    {
-      icon: Twitter,
-      url: "https://twitter.com/yourusername",
-      label: "Twitter",
-    },
-    { icon: Mail, url: "mailto:your.email@example.com", label: "Email" },
-  ];
-
   return (
-    <footer>
-      {/* Main Footer Content */}
-      <div className="container mx-auto px-4 py-12">
-        
-
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
-          {/* Brand Section */}
+    <footer className="border-t bg-background pt-16 pb-8">
+      <div className="container mx-auto px-4">
+        <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-4">
+          {/* --- Column 1: Brand & Socials --- */}
           <div className="space-y-4">
-            <h3 className="text-2xl font-bold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
-              Himadree Chaudhury
-            </h3>
-            <p className="dark:text-slate-400 text-sm leading-relaxed">
-              Full Stack Developer passionate about creating elegant solutions
-              to complex problems.
+            <Link href="/" className="flex items-center gap-2">
+              <Image
+                src={logo}
+                alt="Logo"
+                width={120}
+                height={40}
+                className="object-contain"
+              />
+            </Link>
+            <p className="text-sm text-muted-foreground leading-relaxed max-w-xs">
+              Connect, Host, and Experience. We provide the platform for
+              memorable events and seamless community gatherings.
             </p>
-            <div className="flex gap-3">
-              {socialLinks.map((social, index) => (
-                <a
-                  key={index}
-                  href={social.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="p-2 border rounded-lg hover:bg-foreground hover:text-background transition-colors"
-                  aria-label={social.label}
-                >
-                  <social.icon className="h-5 w-5" />
-                </a>
-              ))}
+            <div className="flex gap-4">
+              <Link
+                href="#"
+                className="text-muted-foreground hover:text-primary transition-colors"
+              >
+                <Facebook className="h-5 w-5" />
+              </Link>
+              <Link
+                href="#"
+                className="text-muted-foreground hover:text-primary transition-colors"
+              >
+                <Twitter className="h-5 w-5" />
+              </Link>
+              <Link
+                href="#"
+                className="text-muted-foreground hover:text-primary transition-colors"
+              >
+                <Instagram className="h-5 w-5" />
+              </Link>
+              <Link
+                href="#"
+                className="text-muted-foreground hover:text-primary transition-colors"
+              >
+                <Linkedin className="h-5 w-5" />
+              </Link>
             </div>
           </div>
 
-          {/* Navigation Links */}
+          {/* --- Column 2: Quick Links --- */}
           <div>
-            <h4 className="text-lg font-semibold mb-4">Navigation</h4>
-            <ul className="space-y-2">
-              {footerLinks.navigation.map((link, index) => (
-                <li key={index}>
-                  <a
+            <h3 className="mb-4 text-lg font-semibold">Product</h3>
+            <ul className="space-y-3 text-sm text-muted-foreground">
+              {footerLinks.product.map((link) => (
+                <li key={link.name}>
+                  <Link
                     href={link.href}
-                    className="dark:text-slate-400 text-slate-600 hover:text-foreground transition-colors text-sm"
+                    className="hover:text-primary transition-colors"
                   >
-                    {link.label}
-                  </a>
+                    {link.name}
+                  </Link>
                 </li>
               ))}
             </ul>
           </div>
 
-          {/* Services Links */}
+          {/* --- Column 3: Contact Info --- */}
           <div>
-            <h4 className="text-lg font-semibold mb-4">Services</h4>
-            <ul className="space-y-2">
-              {footerLinks.services.map((link, index) => (
-                <li key={index}>
-                  <a
-                    href={link.href}
-                    className="dark:text-slate-400 text-slate-600 hover:text-foreground transition-colors text-sm"
-                  >
-                    {link.label}
-                  </a>
-                </li>
-              ))}
+            <h3 className="mb-4 text-lg font-semibold">Contact Us</h3>
+            <ul className="space-y-4 text-sm text-muted-foreground">
+              <li className="flex items-start gap-3">
+                <MapPin className="h-5 w-5 shrink-0 text-primary" />
+                <span>
+                  123 Market Street, Suite 400
+                  <br />
+                  San Francisco, CA 94105
+                </span>
+              </li>
+              <li className="flex items-center gap-3">
+                <Phone className="h-5 w-5 shrink-0 text-primary" />
+                <span>+1 (555) 123-4567</span>
+              </li>
+              <li className="flex items-center gap-3">
+                <Mail className="h-5 w-5 shrink-0 text-primary" />
+                <a
+                  href="mailto:support@example.com"
+                  className="hover:text-primary"
+                >
+                  support@example.com
+                </a>
+              </li>
             </ul>
           </div>
 
-          {/* Resources Links */}
+          {/* --- Column 4: Newsletter --- */}
           <div>
-            <h4 className="text-lg font-semibold mb-4">Resources</h4>
-            <ul className="space-y-2">
-              {footerLinks.resources.map((link, index) => (
-                <li key={index}>
-                  <a
-                    href={link.href}
-                    className="dark:text-slate-400 text-slate-600 hover:text-foreground transition-colors text-sm"
-                  >
-                    {link.label}
-                  </a>
-                </li>
-              ))}
-            </ul>
+            <h3 className="mb-4 text-lg font-semibold">Stay Updated</h3>
+            <p className="mb-4 text-sm text-muted-foreground">
+              Subscribe to our newsletter for the latest events and updates.
+            </p>
+            <form className="flex flex-col gap-2">
+              <Input type="email" placeholder="Enter your email" />
+              <Button type="submit">Subscribe</Button>
+            </form>
           </div>
         </div>
 
-        {/* Bottom Bar */}
-        <div className="border-t border-slate-400 pt-8">
-          <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-            <p className="dark:text-slate-400 text-sm text-center md:text-left">
-              © {currentYear} Himadree Chaudhury. All rights reserved.
+        {/* --- Bottom Bar --- */}
+        <div className="mt-16 border-t pt-8">
+          <div className="flex flex-col items-center justify-between gap-4 md:flex-row">
+            <p className="text-xs text-muted-foreground">
+              &copy; {currentYear} YourCompany Inc. All rights reserved.
             </p>
-            <p className="dark:text-slate-400 text-sm flex items-center gap-1">
-              Made with <Heart className="h-4 w-4 text-red-500 fill-red-500" />{" "}
-              passion
-            </p>
+            <div className="flex gap-6 text-xs text-muted-foreground">
+              {footerLinks.legal.map((link) => (
+                <Link
+                  key={link.name}
+                  href={link.href}
+                  className="hover:text-primary transition-colors"
+                >
+                  {link.name}
+                </Link>
+              ))}
+            </div>
           </div>
         </div>
       </div>
     </footer>
   );
-}
+};
+
+export default Footer;
