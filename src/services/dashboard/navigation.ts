@@ -26,7 +26,7 @@ export const commonNav: NavItem[] = [
     icon: Settings,
     isActive: true,
     items: [
-      { title: "My Profile", url: "/profile" },
+      { title: "My Profile", url: "/my-profile" },
       { title: "Security", url: "/settings/security" }, //
       { title: "Verification", url: "/profile/verification" },
     ],
