@@ -1,8 +1,8 @@
-import { Calendar, MapPin, Tag } from "lucide-react";
-import Image from "next/image";
-import Link from "next/link";
 import { Button } from "@/components/ui/button"; // Assuming you have shadcn/ui
 import { EventData } from "@/types/event.type";
+import { Calendar, MapPin } from "lucide-react";
+import Image from "next/image";
+import Link from "next/link";
 
 const EventCard = ({ event }: { event: EventData }) => {
   const startDate = new Date(event.startTime).toLocaleDateString("en-US", {
@@ -15,7 +15,7 @@ const EventCard = ({ event }: { event: EventData }) => {
     event.joiningFee === 0 ? "Free" : `${event.currency} ${event.joiningFee}`;
 
   return (
-    <div className="group relative flex flex-col overflow-hidden rounded-xl border bg-card text-card-foreground shadow-sm transition-all hover:shadow-md">
+    <div className="group bg-card text-card-foreground relative flex flex-col overflow-hidden rounded-xl border shadow-sm transition-all hover:shadow-md">
       {/* Image Section */}
       <div className="relative h-48 w-full overflow-hidden">
         <Image
@@ -36,7 +36,7 @@ const EventCard = ({ event }: { event: EventData }) => {
           {event.eventCategories.map((cat) => (
             <span
               key={cat.eventCategory.id}
-              className="inline-flex items-center rounded-md bg-secondary px-2 py-1 text-xs font-medium text-secondary-foreground"
+              className="bg-secondary text-secondary-foreground inline-flex items-center rounded-md px-2 py-1 text-xs font-medium"
             >
               {cat.eventCategory.name}
             </span>
@@ -44,18 +44,18 @@ const EventCard = ({ event }: { event: EventData }) => {
         </div>
 
         {/* Title */}
-        <h3 className="mb-2 text-xl font-bold leading-tight tracking-tight">
+        <h3 className="mb-2 text-xl leading-tight font-bold tracking-tight">
           {event.title}
         </h3>
 
         {/* Details */}
-        <div className="mt-auto space-y-2 text-sm text-muted-foreground">
+        <div className="text-muted-foreground mt-auto space-y-2 text-sm">
           <div className="flex items-center gap-2">
-            <Calendar className="h-4 w-4 text-primary" />
+            <Calendar className="text-primary h-4 w-4" />
             <span>{startDate}</span>
           </div>
           <div className="flex items-center gap-2">
-            <MapPin className="h-4 w-4 text-primary" />
+            <MapPin className="text-primary h-4 w-4" />
             <span>
               {event.city}, {event.country}
             </span>
@@ -64,7 +64,7 @@ const EventCard = ({ event }: { event: EventData }) => {
 
         {/* Footer: Host & Price */}
         <div className="mt-5 flex items-center justify-between border-t pt-4">
-          <div className="text-lg font-bold text-primary">{priceLabel}</div>
+          <div className="text-primary text-lg font-bold">{priceLabel}</div>
           <Button asChild size="sm">
             <Link href={`/events/${event.slug}`}>View Details</Link>
           </Button>
