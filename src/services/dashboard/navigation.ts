@@ -4,7 +4,6 @@ import {
   LayoutDashboard,
   LucideIcon,
   Settings,
-  ShieldCheck,
   UserCheck,
   Users,
 } from "lucide-react";
@@ -27,7 +26,6 @@ export const commonNav: NavItem[] = [
     isActive: true,
     items: [
       { title: "My Profile", url: "/my-profile" },
-      { title: "Security", url: "/settings/security" }, //
       { title: "Verification", url: "/profile/verification" },
     ],
   },
@@ -40,21 +38,23 @@ export const roleNavs: Record<string, NavItem[]> = {
       title: "Dashboard",
       url: "/admin/dashboard",
       icon: LayoutDashboard,
+      isActive: true,
+      items: [
+        {
+          title: "Overview",
+          url: "/admin/dashboard",
+        },
+      ],
     },
     {
       title: "User Management",
       url: "/admin/users",
       icon: Users,
+      isActive: true,
       items: [
         { title: "All Users", url: "/admin/users" },
         { title: "Hosts", url: "/admin/hosts" },
       ],
-    },
-    {
-      title: "System",
-      url: "#",
-      icon: ShieldCheck,
-      items: [{ title: "Logs", url: "/admin/logs" }],
     },
   ],
   HOST: [

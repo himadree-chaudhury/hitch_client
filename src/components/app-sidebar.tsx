@@ -1,6 +1,5 @@
 "use client";
 
-import * as React from "react";
 import logo from "@/assets/logo.png";
 import { NavMain } from "@/components/nav-main";
 import { NavUser } from "@/components/nav-user";
@@ -14,11 +13,12 @@ import {
   SidebarMenuItem,
   SidebarRail,
 } from "@/components/ui/sidebar";
+import * as React from "react";
 // Import your navigation config
 import { commonNav, roleNavs } from "@/services/dashboard/navigation";
+import { IUser } from "@/types/user.type";
 import Image from "next/image";
 import Link from "next/link";
-import { IUser } from "@/types/user.type";
 
 // Define props
 interface AppSidebarProps extends React.ComponentProps<typeof Sidebar> {
@@ -29,7 +29,7 @@ export function AppSidebar({ user, ...props }: AppSidebarProps) {
   // Logic: Calculate menu items immediately based on the prop
   // Note: Usually Role items go FIRST, then Common items (Settings) go LAST
   const specificNav = user ? roleNavs[user.role] || [] : [];
-  const navItems = [...specificNav, ...commonNav];
+  const navItems = [...commonNav, ...specificNav];
 
   return (
     <Sidebar collapsible="icon" {...props}>

@@ -5,7 +5,13 @@ export interface IUser {
   email: string;
   provider: "CREDENTIALS" | "GOOGLE";
   role: UserRole;
-  status: string;
+  status: "ACTIVE" | "BLOCKED" | "BANNED";
+  verification: boolean;
   createdAt: string;
   updatedAt: string;
+}
+
+export interface UsersResponse {
+  success: boolean;
+  data: IUser[];
 }

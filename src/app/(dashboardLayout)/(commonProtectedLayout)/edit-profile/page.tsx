@@ -8,7 +8,7 @@ import {
   FieldDescription,
 } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea"; // Assuming you have this
+import { Textarea } from "@/components/ui/textarea";
 import {
   Select,
   SelectContent,
@@ -16,16 +16,15 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Checkbox } from "@/components/ui/checkbox";// Import the action above
 import { useActionState, useEffect } from "react";
 import { toast } from "sonner";
-import { Label } from "@/components/ui/label"; // Shadcn Label
 import { updateUserProfile } from "@/services/auth/updateProfile";
 
-// Mock interests for the checkboxes
-const AVAILABLE_INTERESTS = ["Camping", "Fishing", "Hiking", "Cooking", "Tech"];
-
-export default function EditProfileForm({ initialData }: { initialData?: any }) {
+export default function EditProfileForm({
+  initialData,
+}: {
+  initialData?: any;
+}) {
   const [state, formAction, isPending] = useActionState(
     updateUserProfile,
     null,
@@ -40,6 +39,9 @@ export default function EditProfileForm({ initialData }: { initialData?: any }) 
       }
     }
   }, [state]);
+
+  // Helper: Convert array ["camping", "fishing"] -> "camping, fishing"
+  const defaultInterests = initialData?.interests?.join(", ") || "";
 
   return (
     <div className="bg-background mx-auto flex max-w-2xl flex-col gap-6 rounded-lg border p-8 shadow-lg">
@@ -134,29 +136,18 @@ export default function EditProfileForm({ initialData }: { initialData?: any }) 
             </Field>
           </div>
 
-          {/* --- Interests (Checkboxes) --- */}
+          {/* --- Interests (Comma Separated Input) --- */}
           <Field>
-            <FieldLabel className="mb-3 block">Interests</FieldLabel>
-            <div className="grid grid-cols-2 gap-3 md:grid-cols-3">
-              {AVAILABLE_INTERESTS.map((interest) => (
-                <div key={interest} className="flex items-center space-x-2">
-                  <Checkbox
-                    id={`interest-${interest}`}
-                    name="interests"
-                    value={interest.toLowerCase()}
-                    defaultChecked={initialData?.interests?.includes(
-                      interest.toLowerCase(),
-                    )}
-                  />
-                  <Label
-                    htmlFor={`interest-${interest}`}
-                    className="text-sm leading-none font-medium peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-                  >
-                    {interest}
-                  </Label>
-                </div>
-              ))}
-            </div>
+            <FieldLabel htmlFor="interests">Interests</FieldLabel>
+            <Input
+              id="interests"
+              name="interests"
+              placeholder="Camping, Fishing, Tech, Hiking"
+              defaultValue={defaultInterests}
+            />
+            <FieldDescription>
+              Separate multiple interests with commas.
+            </FieldDescription>
           </Field>
         </FieldGroup>
 

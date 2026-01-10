@@ -23,7 +23,17 @@ export const updateUserProfile = async (
   formData: FormData,
 ) => {
   try {
-    // 2. Extract Data from FormData
+    const interestsString = formData.get("interests") as string;
+
+    // 2. Convert "Camping, Fishing, " -> ["Camping", "Fishing"]
+    // Split by comma, trim whitespace, and filter out empty strings
+    const interestsArray = interestsString
+      ? interestsString
+          .split(",")
+          .map((s) => s.trim())
+          .filter((s) => s.length > 0)
+      : [];
+
     const rawData = {
       firstName: formData.get("firstName"),
       lastName: formData.get("lastName"),
@@ -31,8 +41,7 @@ export const updateUserProfile = async (
       gender: formData.get("gender"),
       city: formData.get("city"),
       country: formData.get("country"),
-      // Extract all interests as an array
-      interests: formData.getAll("interests"),
+      interests: interestsArray, // Pass the processed array here
     };
 
     const profileImage = formData.get("profileImage") as File | null;
